@@ -1,0 +1,27 @@
+# Ignorar archivos sensibles y temporales
+
+# Archivos de entorno (nunca subir credenciales reales)
+.env
+*.env
+
+# Archivos de log
+*.log
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de backup/editores
+*~
+*.swp
+*.bak
+
+# Archivos de Python (por si en algún momento se copian accidentalmente)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de Docker temporales
+*.pid
+*.seed

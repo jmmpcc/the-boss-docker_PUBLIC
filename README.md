@@ -1,8 +1,12 @@
-# 📡 Meshtastic APRS Gateway (Docker)
+# 🌐 Meshtastic Broker + APRS Gateway + Telegram Bot (Docker)
 
-Este proyecto proporciona un **gateway Meshtastic ↔ APRS** con soporte para **Telegram Bot** y **Broker JSONL**, empaquetado en contenedores Docker listos para usar.  
+Este proyecto proporciona un **stack completo** basado en Docker con tres servicios principales:
 
-👉 Los usuarios no necesitan el código fuente, solo descargar las imágenes desde **GitHub Container Registry (GHCR)** y levantar los servicios con `docker-compose`.
+- 🔌 **Broker** → Conecta al nodo Meshtastic y expone una API JSONL.  
+- 📡 **APRS Gateway** → Pasarela bidireccional entre Meshtastic y APRS (vía KISS TCP).  
+- 🤖 **Telegram Bot** → Control remoto y consulta del estado de la red Meshtastic desde Telegram.  
+
+👉 No se expone el código fuente. Todo se distribuye mediante **imágenes Docker** publicadas en **GitHub Container Registry (GHCR)**.
 
 ---
 
@@ -47,11 +51,11 @@ MESHTASTIC_HOST=192.168.1.201
 BROKER_PORT=8765
 BACKLOG_PORT=8766
 
-# === Telegram ===
+# === Telegram Bot ===
 TELEGRAM_TOKEN=xxxxxxxxxxxxx
 ADMIN_IDS=123456789
 
-# === APRS ===
+# === APRS Gateway ===
 APRS_CALL=EB2XXX-11
 KISS_HOST=host.docker.internal
 KISS_PORT=8100
@@ -63,21 +67,19 @@ BOT_START_DELAY=90
 
 ## 🛠️ Servicios
 
-El `docker-compose.yml` arranca tres contenedores:
-
 ### 🔌 Broker
-- Imagen: `ghcr.io/jmmpcc/meshtastic-broker:latest`
+- Imagen: `ghcr.io/jmmpcc/meshtastic-broker:latest`  
 - Función: conecta al nodo Meshtastic y expone la API JSONL.  
 - Puertos:
   - `8765` → Broker JSONL
   - `8766` → Backlog server (control interno)
 
 ### 📡 APRS Gateway
-- Imagen: `ghcr.io/jmmpcc/meshtastic-aprs:latest`
+- Imagen: `ghcr.io/jmmpcc/meshtastic-aprs:latest`  
 - Función: puente bidireccional entre Meshtastic y APRS (vía KISS TCP).  
 
 ### 🤖 Telegram Bot
-- Imagen: `ghcr.io/jmmpcc/meshtastic-bot:latest`
+- Imagen: `ghcr.io/jmmpcc/meshtastic-bot:latest`  
 - Función: control remoto vía comandos de Telegram.  
 - Necesita el token del bot (`TELEGRAM_TOKEN`) y los IDs de administradores (`ADMIN_IDS`).  
 
