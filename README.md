@@ -111,7 +111,7 @@ Crea un archivo `.env` en la raíz (puedes partir de `.env-example.txt`). Mínim
   - Usa `BOT_START_DELAY` para dar tiempo a que el broker enlace con el nodo.
 
 - **aprs** SOLO DISPONIBLE PARA RADIOAFICIONADOS CON INDICATIVO
-- Imagen: `ghcr.io/jmmpcc/meshtastic-aprs:latest`  
+- Imagen: 
 - Función: puente bidireccional entre Meshtastic y APRS (vía KISS TCP). 
   - **KISS TCP** hacia tu TNC: `KISS_HOST:KISS_PORT`.
   - **Control UDP** (desde el bot) en `127.0.0.1:9464` (compartiendo red con broker).
