@@ -1,54 +1,7 @@
 services:
   broker:
     image: ghcr.io/jmmpcc/meshtastic-broker:latest
-    container_name: meshtastic-broker
-    restart: unless-stopped
-    environment:
-      - MESHTASTIC_HOST=${MESHTASTIC_HOST}
-      - BROKER_PORT=${BROKER_PORT:-8765}
-      - BACKLOG_PORT=${BACKLOG_PORT:-8766}
-    ports:
-      - "${BROKER_PORT:-8765}:8765"
-      - "${BACKLOG_PORT:-8766}:8766"
-    # Optional: persistir datos/logs del broker
-    # volumes:
-    #   - broker_data:/app/broker_data
-
-  aprs:
-    image: ghcr.io/jmmpcc/meshtastic-aprs:latest
-    container_name: meshtastic-aprs
-    depends_on:
-      - broker
-    restart: unless-stopped
-    environment:
-      - BROKER_HOST=broker
-      - BROKER_PORT=8765
-      - BROKER_CTRL_HOST=broker
-      - BROKER_CTRL_PORT=8766
-      - APRS_CALL=${APRS_CALL}
-      - KISS_HOST=${KISS_HOST:-host.docker.internal}
-      - KISS_PORT=${KISS_PORT:-8100}
-      - MESHTASTIC_CH=${MESHTASTIC_CH:-0}
-      - BOT_START_DELAY=${BOT_START_DELAY:-90}
-
   bot:
     image: ghcr.io/jmmpcc/meshtastic-bot:latest
-    container_name: meshtastic-bot
-    depends_on:
-      - broker
-    restart: unless-stopped
-    environment:
-      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
-      - ADMIN_IDS=${ADMIN_IDS}
-      - BROKER_HOST=broker
-      - BROKER_PORT=8765
-      - BACKLOG_PORT=8766
-      - DISABLE_BOT_TCP=1
-    # Optional: persistir datos del bot (/app/bot_data)
-    # volumes:
-    #   - bot_data:/app/bot_data
-
-# Descomenta si usas volúmenes persistentes
-# volumes:
-#   broker_data:
-#   bot_data:
+  aprs:
+    image: ghcr.io/jmmpcc/meshtastic-aprs:latest
