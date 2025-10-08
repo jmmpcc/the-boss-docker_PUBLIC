@@ -30,17 +30,36 @@ Este proyecto proporciona un **stack completo** basado en Docker con tres servic
 ```bash
 git clone https://github.com/jmmpcc/the-boss-docker_PUBLIC.git
 cd the-boss-docker_PUBLIC
+
+Nota: Actualizar a una nueva version:
+ docker compose pull
+ docker compose up -d
+
+
 ```
 2. Copiar el archivo de variables de entorno y editarlo con tus datos:
 
 ```bash
 cp .env-example .env
 ```
-3. Levantar los servicios:
+3. Descargar las imágenes de GHCR
 
 ```bash
-docker compose up -d broker
-docker compose up -d bot
+docker compose pull
+
+```
+4.- Levantar servicios
+```bash
+Levantar todo:
+ docker compose up -d
+
+levantar por partes:
+ docker compose up -d broker
+ docker compose up -d bot
+
+# (Opcional APRS) Sólo radioaficionados con indicativo.
+ docker compose up -d aprs
+
 ```
 4. Ver logs
 docker compose logs -f broker
