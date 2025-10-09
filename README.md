@@ -52,7 +52,14 @@ Este proyecto proporciona un **stack completo** basado en Docker con tres servic
 1. Clonar este repositorio:
 
 ```bash
-git clone https://github.com/jmmpcc/the-boss-docker_PUBLIC.git
+git clone https://github.com/jmmpcc/MeshBot-The_Boss.git
+cd MeshBot-The_Boss
+
+Nota: Actualizar a una nueva version:
+ docker compose pull
+ docker compose up -d
+
+.git
 cd the-boss-docker_PUBLIC
 
 Nota: Actualizar a una nueva version:
