@@ -8,6 +8,25 @@ Este proyecto proporciona un **stack completo** basado en Docker con tres servic
 
 👉 No se expone el código fuente. Todo se distribuye mediante **imágenes Docker** publicadas en **GitHub Container Registry (GHCR)**.
 
+## 🧾 Historial de versiones
+
+### 🟢 v6.1 (Octubre 2025)
+- Añadido bridge embebido y externo.
+- Mejoras APRS (eco, troceo, APRS‑IS).
+- Comandos `/bloquear`, `/reconectar`, `/tareas`, `/diario`.
+- Cooldown y guards TCP integrados.
+- Persistencia de nodos y backlog extendida.
+- Ficheros `.env` ampliados con nuevas variables.
+
+### 🟣 v6.0 (Septiembre 2025)
+- Integración estable broker + bot + APRS.
+- Sistema de tareas persistentes.
+- Notificaciones y logs mejorados.
+- Docker Compose optimizado.
+
+---
+
+
 ### Mensaje diario automático
 ```text
 /diario 12:00 canal 2 Avisos del mediodía
@@ -161,6 +180,33 @@ Crea un archivo `.env` en la raíz (puedes partir de `.env-example.txt`). Mínim
 /en 5,10,25 canal 0 Recordatorio periódico
 ```
 👉 Envía el mismo mensaje a los 5, 10 y 25 minutos.
+
+---
+
+## 🔗 Bridge A↔B (Embebido y externo)
+
+### Embebido (en el broker)
+Activa en `.env`:
+```bash
+BRIDGE_ENABLED=1
+A_HOST= ip del primer nodo
+B_HOST= ip del segundo nodo
+A2B_CH_MAP=0:0,1:1,2:2
+B2A_CH_MAP=0:0,1:1,2:2
+RATE_LIMIT_PER_SIDE=8
+DEDUP_TTL=45
+TAG_BRIDGE=[BRIDGE]
+```
+
+### Externo
+```bash
+python mesh_preset_bridge.py --a 'ip del primer nodo' --b 'ip del segundo nodo'
+```
+
+Ambos bridges:
+- Filtran duplicados (`DEDUP_TTL`)
+- Limitan tráfico (`RATE_LIMIT_PER_SIDE`)
+- Mantienen logs detallados
 
 ---
 
