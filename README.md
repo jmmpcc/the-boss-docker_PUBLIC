@@ -79,7 +79,7 @@ Nota: Actualizar a una nueva version:
  docker compose up -d
 
 .git
-cd the-boss-docker_PUBLIC
+cd the-boss-docker
 
 Nota: Actualizar a una nueva version:
  docker compose pull
